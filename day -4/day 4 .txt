@@ -1,0 +1,193 @@
+//Do the below programs in ononymous function & IIFE
+
+              //print add number in an array
+
+
+//Anonymous function 
+
+const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((a, b) => a + b, 0);
+console.log(sum);
+
+//convert all the string to title caps in a string array
+
+const strings = ["hello world", "good morning", "how are you"];
+
+const titleCaps = strings.map((string) => {
+  return string.toLowerCase().split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' '); 
+});
+
+console.log(titleCaps);
+
+//sum of all numbers in an array
+
+(function() {
+  var numbers = [10, 20, 30, ];
+  
+  var multipliedNumbers = numbers.map(num => num * 2);
+  
+  console.log(multipliedNumbers);
+})();
+
+//return all the prime number in an array
+
+var a = [5, 9, 63, 29, 35, 6, 55, 23]
+var prime = [];
+
+function isPrime(item) {
+    var identifier = item / 2;
+      for (var j = 2; j <= identifier; j++) {
+       if ((item % j) == 0) { // modulous
+        return false;
+       } 
+     }
+     return true;
+}
+for (var index = 0; index < a.length; index++) {
+  if (isPrime(a[index])) {
+      prime.push(a[index])
+  }
+}
+
+console.log(prime);
+
+//return all the palindromes in an array
+
+function findPalindromes(arr) {
+  const palindromes = [];
+  for (let i = 0; i < arr.length; i++) {
+    const word = arr[i];
+    if (word === word.split('').reverse().join('')) {
+      palindromes.push(word);
+    }
+  }
+  return palindromes;
+}
+const words = ["level", "hello", "radar", "world", "madam"];
+const result = findPalindromes(words);
+console.log(result);
+
+//Return median of two sorted arrays of the same size
+
+function findMedianSortedArrays(arr1, arr2) {
+  const combinedArray = arr1.concat(arr2).sort((a, b) => a - b);
+  const middleIndex = Math.floor(combinedArray.length / 2);
+
+  if (combinedArray.length % 2 === 0) {
+    const median = (combinedArray[middleIndex - 1] + combinedArray[middleIndex]) / 2;
+    return median;
+  } else {
+    return combinedArray[middleIndex];
+  }
+}
+
+const arr1 = [1, 3, 5];
+const arr2 = [2, 4, 6];
+const median = findMedianSortedArrays(arr1, arr2);
+console.log(median);
+
+
+//remove duplicates from an array
+
+let arr = ["apple", "mango", "apple", "orange", "mango", "mango"];
+
+function removeDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) === index);
+}
+
+console.log(removeDuplicates(arr));
+
+//rotate an array by k times
+
+function rotateArray(arr, k) {
+  if (k === 0 || arr.length === 0 || k % arr.length === 0) {
+    return arr; 
+  }
+
+  const rotations = k % arr.length; 
+
+  const removed = arr.splice(-rotations); 
+  arr.unshift(...removed); 
+
+  return arr;
+}
+
+const originalArray = [1, 2, 3, 4, 5];
+const rotatedArray = rotateArray(originalArray, 2);
+
+console.log(rotatedArray);
+
+     //2. Do the below programs in arrow functions.
+
+    const num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    
+    numbers.forEach(number => {
+      if (number % 2 !== 0) {
+        console.log(number);
+      }
+    });
+
+    //convert all the strings to tittle caps
+
+    const convertToTitleCase = str => {
+      return str.toLowerCase().split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }).join(' ');
+    };
+    
+    const inputStrings = [
+      'hello world',
+      'this is a test',
+      'Arrow function'
+    ];
+    
+    const titleCaseStrings = inputStrings.map(convertToTitleCase);
+    console.log(titleCaseStrings);
+
+    //sum of the numbers in an array
+
+    const add = (x, y) => x * y;
+
+    console.log(add(5, 3))
+
+   //Return all the prime numbers in an array
+
+   const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const isPrime = num => {
+
+  if (num < 2) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const primeNumbers = numbers.filter(isPrime);
+
+console.log(primeNumbers);
+
+//Return all the palindromes in an array
+
+
+const words = ['level', 'hello', 'radar', 'world', 'madam'];
+
+const isPalindrome = word => {
+  const reversed = word.split('').reverse().join('');
+  return word === reversed;
+};
+
+const palindromes = words.filter(isPalindrome);
+
+console.log(palindromes);
+
+
+
+    
+

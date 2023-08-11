@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>XMLHttpRequest Example</title>
+  </head>
+  <body>
+    <script>
+      //Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+
+      //Define HTTP method and URL
+      var method = "GET";
+      var url = "https://restcountries.com/v3.1/all";
+
+      //Open the request
+      xhr.open(method, url);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          //Request was successful
+          //console.log(xhr.responseText);
+          var countriesAsia = JSON.parse(xhr.responseText);
+
+          var country = countriesAsia.filter(country => country.region === 'Asia');
+          console.log(country);
+
+          var countryWithLessPopulation = countriesAsia.filter(country => country.population < 200000);
+          console.log(countryWithLessPopulation);
+
+          countriesAsia.forEach(country => {
+            console.log(country);
+          });
+
+          var totalPopulation = countriesAsia.reduce((acc, country) => acc + country.population, 0);
+          console.log('Total Population:', totalPopulation);
+
+          var countriesWithUSD = countriesAsia.filter(country => country.currency === 'US Dollars');
+          console.log('Countries that use US Dollars:', countriesWithUSD);
+          
+        } else {
+          //Request failed
+          console.log("Request failed", xhr.status);
+        }
+      };
+
+      //send the request
+      xhr.send();
+    </script>
+  </body>
+</html>

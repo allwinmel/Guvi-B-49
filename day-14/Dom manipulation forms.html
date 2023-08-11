@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  position: relative;
+  top: 50px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.food-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.food-options label {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="myForm">
+      <h1>Registration Form</h1>
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male" required> Male
+        <input type="radio" name="gender" value="female" required> Female
+        <input type="radio" name="gender" value="other" required> Other
+      </div>
+
+      <div class="form-group">
+        <label>Choice of Food (Select at least 2):</label>
+        <div class="food-options">
+          <label><input type="checkbox" name="food" value="pizza"> Pizza</label>
+          <label><input type="checkbox" name="food" value="burger"> Burger</label>
+          <label><input type="checkbox" name="food" value="pasta"> Pasta</label>
+          <label><input type="checkbox" name="food" value="salad"> Salad</label>
+          <label><input type="checkbox" name="food" value="icecream"> Ice Cream</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="state">State:</label>
+        <input type="text" id="state" required>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" required>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('myForm');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const address = document.getElementById('address').value;
+  const pincode = document.getElementById('pincode').value;
+
+  const genderOptions = document.getElementsByName('gender');
+  let gender;
+  genderOptions.forEach(option => {
+    if (option.checked) {
+      gender = option.value;
+    }
+  });
+
+  const foodOptions = document.querySelectorAll('input[name="food"]:checked');
+  const foods = Array.from(foodOptions).map(option => option.value);
+
+  const state = document.getElementById('state').value;
+  const country = document.getElementById('country').value;
+
+  // Display the form data
+  console.log('First Name:', firstName);
+  console.log('Last Name:', lastName);
+  console.log('Address:', address);
+  console.log('Pincode:', pincode);
+  console.log('Gender:', gender);
+  console.log('Choice of Food:', foods.join(', '));
+  console.log('State:', state);
+  console.log('Country:', country);
+});
+
+  </script>
+</body>
+</html>

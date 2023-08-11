@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    .todo-card {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Todo App</h1>
+    <form id="todoForm">
+      <div class="mb-3">
+        <label for="taskName" class="form-label">Task Name</label>
+        <input type="text" class="form-control" id="taskName" required>
+      </div>
+      <div class="mb-3">
+        <label for="taskDescription" class="form-label">Description</label>
+        <textarea class="form-control" id="taskDescription"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+
+    <div class="mt-4">
+      <label for="statusFilter" class="form-label">Filter by Status:</label>
+      <select id="statusFilter" class="form-select">
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="notCompleted">Not Completed</option>
+      </select>
+    </div>
+
+    <div id="todoList" class="mt-4"></div>
+  </div>
+
+  <script>
+    const todoList = document.getElementById("todoList");
+    const todoForm = document.getElementById("todoForm");
+    const statusFilter = document.getElementById("statusFilter");
+
+    let todos = [];
+
+    function renderTodos() {
+      todoList.innerHTML = "";
+      const filteredTodos = filterTodos();
+
+      filteredTodos.forEach((todo, index) => {
+        const todoCard = document.createElement("div");
+        todoCard.className = "card todo-card";
+        todoCard.innerHTML = `
+          <div class="card-body">
+            <h5 class="card-title">${todo.taskName}</h5>
+            <p class="card-text">${todo.taskDescription}</p>
+            <p class="card-text">Status: <span class="status">${todo.status}</span></p>
+            <button class="btn btn-secondary btn-sm edit-btn" data-index="${index}">Edit</button>
+            <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Delete</button>
+          </div>
+        `;
+
+        const statusElement = todoCard.querySelector(".status");
+        statusElement.addEventListener("click", () => toggleStatus(index));
+
+        const editBtn = todoCard.querySelector(".edit-btn");
+        editBtn.addEventListener("click", () => editTodo(index));
+
+        const deleteBtn = todoCard.querySelector(".delete-btn");
+        deleteBtn.addEventListener("click", () => deleteTodo(index));
+
+        todoList.appendChild(todoCard);
+      });
+    }
+
+    function filterTodos() {
+      const filterValue = statusFilter.value;
+      if (filterValue === "completed") {
+        return todos.filter(todo => todo.status === "Completed");
+      } else if (filterValue === "notCompleted") {
+        return todos.filter(todo => todo.status !== "Completed");
+      } else {
+        return todos;
+      }
+    }
+
+    function toggleStatus(index) {
+      todos[index].status = todos[index].status === "Completed" ? "Not Completed" : "Completed";
+      renderTodos();
+    }
+
+    function editTodo(index) {
+      const newStatus = prompt("Edit status (Completed/Not Completed):", todos[index].status);
+      if (newStatus) {
+        todos[index].status = newStatus;
+        renderTodos();
+      }
+    }
+
+    function deleteTodo(index) {
+      todos.splice(index, 1);
+      renderTodos();
+    }
+
+    todoForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const taskName = document.getElementById("taskName").value;
+      const taskDescription = document.getElementById("taskDescription").value;
+      todos.push({
+        taskName,
+        taskDescription,
+        status: "Not Completed"
+      });
+      renderTodos();
+      todoForm.reset();
+    });
+
+    statusFilter.addEventListener("change", () => {
+      renderTodos();
+    });
+
+    renderTodos();
+  </script>
+</body>
+</html>

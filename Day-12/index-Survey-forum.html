@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survey Forum</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Survey Forum</h1>
+    <form id="surveyForm">
+  
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" required>
+      </div>
+ 
+      <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Your Experience:</label>
+        <textarea class="form-control" id="experience" name="experience" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="satisfaction">How Satisfied Are You?</label>
+        <select class="form-control" id="satisfaction" name="satisfaction" required>
+          <option value="" disabled selected>Select Satisfaction Level</option>
+          <option value="very_satisfied">Very Satisfied</option>
+          <option value="satisfied">Satisfied</option>
+          <option value="neutral">Neutral</option>
+          <option value="dissatisfied">Dissatisfied</option>
+          <option value="very_dissatisfied">Very Dissatisfied</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Additional Comments or Suggestions:</label>
+        <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
